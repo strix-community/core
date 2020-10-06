@@ -1,4 +1,0 @@
-finder:
-  not-name:
-    - index.php
-    - server.php
