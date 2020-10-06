@@ -24,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->loadDefaultConfigFiles();
+
         if ($this->app->isLocal()) {
             $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
             $this->app->register(TelescopeServiceProvider::class);
@@ -49,5 +51,21 @@ class AppServiceProvider extends ServiceProvider
     {
         \Bouncer::useAbilityModel(Ability\Ability::class);
         \Bouncer::useRoleModel(Role\Role::class);
+    }
+
+    protected function loadDefaultConfigFiles(): void
+    {
+
+        $configPath = __DIR__ . '/../../config/*.php';
+
+
+        $configFiles = glob($configPath);
+
+        foreach ($configFiles as $config) {
+            $this->mergeConfigFrom(
+                $config,
+                pathinfo($config)['filename']
+            );
+        }
     }
 }
