@@ -22,8 +22,7 @@ class Spacer extends Component
      */
     public function __construct(
         string $x
-    )
-    {
+    ) {
         $this->x = $x;
     }
 

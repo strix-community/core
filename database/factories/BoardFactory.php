@@ -10,8 +10,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Strix\Models\App\Models\Model;
 use Illuminate\Support\Str;
+use Strix\Models\App\Models\Model;
 
 class BoardFactory extends Factory
 {
@@ -31,7 +31,7 @@ class BoardFactory extends Factory
     {
         return [
             'title' => $this->faker->name,
-            'slug' => Str::slug($this->faker->name),
+            'slug'  => Str::slug($this->faker->name),
         ];
     }
 }

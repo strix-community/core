@@ -9,11 +9,8 @@
 
 declare(strict_types=1);
 
-
 namespace Strix\Traits\Models;
 
-
-use Hidehalo\Nanoid\Client;
 use Illuminate\Database\Eloquent\Model;
 use Strix\Traits\Generators\NanoIdGenerator;
 

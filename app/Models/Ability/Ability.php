@@ -14,17 +14,17 @@ namespace Strix\Models\Ability;
 use Strix\Traits\Models\HasNanoId;
 
 /**
- * Strix\Models\Ability\Ability
+ * Strix\Models\Ability\Ability.
  *
- * @property int $id
- * @property string $uid
- * @property string $name
- * @property string|null $title
- * @property int|null $entity_id
- * @property string|null $entity_type
- * @property bool $only_owned
- * @property array $options
- * @property int|null $scope
+ * @property int                             $id
+ * @property string                          $uid
+ * @property string                          $name
+ * @property string|null                     $title
+ * @property int|null                        $entity_id
+ * @property string|null                     $entity_type
+ * @property bool                            $only_owned
+ * @property array                           $options
+ * @property int|null                        $scope
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read string $identifier
@@ -33,6 +33,7 @@ use Strix\Traits\Models\HasNanoId;
  * @property-read int|null $roles_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Strix\Models\User\User[] $users
  * @property-read int|null $users_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\Silber\Bouncer\Database\Ability byName($name, $strict = false)
  * @method static \Illuminate\Database\Eloquent\Builder|\Silber\Bouncer\Database\Ability forModel($model, $strict = false)
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Ability\Ability newModelQuery()

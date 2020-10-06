@@ -16,18 +16,19 @@ use Strix\Models\User\User;
 use Strix\Traits\Models\HasNanoId;
 
 /**
- * Strix\Models\OAuthProvider\OAuthProvider
+ * Strix\Models\OAuthProvider\OAuthProvider.
  *
- * @property int $id
- * @property string $uid
- * @property int $user_id
- * @property string $provider
- * @property string $provider_user_id
- * @property string|null $access_token
- * @property string|null $refresh_token
+ * @property int                             $id
+ * @property string                          $uid
+ * @property int                             $user_id
+ * @property string                          $provider
+ * @property string                          $provider_user_id
+ * @property string|null                     $access_token
+ * @property string|null                     $refresh_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Strix\Models\User\User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\OAuthProvider\OAuthProvider newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\OAuthProvider\OAuthProvider newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\OAuthProvider\OAuthProvider query()
@@ -54,7 +55,7 @@ class OAuthProvider extends Model
     protected $table = 'oauth_providers';
 
     protected $fillable = [
-        'provider', 'provider_user_id', 'access_token', 'refresh_token', 'profile_url'
+        'provider', 'provider_user_id', 'access_token', 'refresh_token', 'profile_url',
     ];
 
     /**

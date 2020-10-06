@@ -9,9 +9,7 @@
 
 declare(strict_types=1);
 
-
 namespace Strix\Traits\Models;
-
 
 trait HasRules
 {
@@ -30,6 +28,7 @@ trait HasRules
      * This will include empty fields as a null value.
      *
      * @param $request
+     *
      * @return array
      */
     public static function filterRequest(\Illuminate\Foundation\Http\FormRequest $request): array

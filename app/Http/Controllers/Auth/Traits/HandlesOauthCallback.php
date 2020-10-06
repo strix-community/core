@@ -9,9 +9,7 @@
 
 declare(strict_types=1);
 
-
 namespace Strix\Http\Controllers\Auth\Traits;
-
 
 use Strix\Models\OAuthProvider\OAuthProvider;
 use Strix\Models\User\User;
@@ -22,10 +20,12 @@ trait HandlesOauthCallback
     use NanoIdGenerator;
 
     /**
-     * @param string $provider
+     * @param string                            $provider
      * @param \Laravel\Socialite\Contracts\User $socialiteUser
-     * @return User
+     *
      * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileCannotBeAdded
+     *
+     * @return User
      */
     protected function findOrCreateUser(string $provider, \Laravel\Socialite\Contracts\User $socialiteUser): User
     {
@@ -37,7 +37,7 @@ trait HandlesOauthCallback
 
         if ($oauthProvider) {
             $oauthProvider->update([
-                'access_token' => $socialiteUser->token,
+                'access_token'  => $socialiteUser->token,
                 'refresh_token' => $socialiteUser->refreshToken,
             ]);
 
@@ -52,15 +52,17 @@ trait HandlesOauthCallback
     }
 
     /**
-     * @param string $provider
+     * @param string                            $provider
      * @param \Laravel\Socialite\Contracts\User $socialiteUser
-     * @return User
+     *
      * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileCannotBeAdded
+     *
+     * @return User
      */
     protected function createUser(string $provider, \Laravel\Socialite\Contracts\User $socialiteUser): User
     {
         $user = User::create([
-            'name' => $socialiteUser->getName(),
+            'name'  => $socialiteUser->getName(),
             'email' => $socialiteUser->getEmail(),
         ]);
 
@@ -69,16 +71,16 @@ trait HandlesOauthCallback
         $avatar = $socialiteUser->getAvatar();
 
         $user->addMediaFromUrl($avatar)
-            ->sanitizingFileName(function($avatar) {
-                return static::generateNanoId(false) . '.' .  \File::extension($avatar);
+            ->sanitizingFileName(function ($avatar) {
+                return static::generateNanoId(false).'.'.\File::extension($avatar);
             })
             ->toMediaCollection('avatar');
 
         $user->oauthProviders()->create([
-            'provider' => $provider,
+            'provider'         => $provider,
             'provider_user_id' => $socialiteUser->getId(),
-            'access_token' => $socialiteUser->token,
-            'refresh_token' => $socialiteUser->refreshToken,
+            'access_token'     => $socialiteUser->token,
+            'refresh_token'    => $socialiteUser->refreshToken,
         ]);
 
         return $user;

@@ -19,24 +19,25 @@ use Strix\Traits\Models\HasComments;
 use Strix\Traits\Models\HasNanoId;
 
 /**
- * Strix\Models\Thread\Thread
+ * Strix\Models\Thread\Thread.
  *
- * @property int $id
- * @property string $uid
- * @property string $title
- * @property string $slug
- * @property int $comment_count
- * @property mixed $content
- * @property int $board_id
- * @property int $user_id
- * @property string|null $locked_at
+ * @property int                             $id
+ * @property string                          $uid
+ * @property string                          $title
+ * @property string                          $slug
+ * @property int                             $comment_count
+ * @property mixed                           $content
+ * @property int                             $board_id
+ * @property int                             $user_id
+ * @property string|null                     $locked_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $deleted_at
+ * @property string|null                     $deleted_at
  * @property-read \Strix\Models\Board\Board $board
  * @property-read \Illuminate\Database\Eloquent\Collection|\Strix\Models\Comment\Comment[] $comments
  * @property-read int|null $comments_count
  * @property-read \Strix\Models\User\User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Thread\Thread newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Thread\Thread newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Thread\Thread query()
@@ -53,13 +54,16 @@ use Strix\Traits\Models\HasNanoId;
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Thread\Thread whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Thread\Thread whereUserId($value)
  * @mixin \Eloquent
+ *
  * @method static \Illuminate\Database\Query\Builder|\Strix\Models\Thread\Thread onlyTrashed()
  * @method static \Illuminate\Database\Query\Builder|\Strix\Models\Thread\Thread withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\Strix\Models\Thread\Thread withoutTrashed()
  */
 class Thread extends Model
 {
-    use HasNanoId, HasComments, SoftDeletes;
+    use HasNanoId;
+    use HasComments;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -67,7 +71,7 @@ class Thread extends Model
      * @var array
      */
     protected $fillable = [
-        'uid', 'title', 'slug', 'content', 'comment_count', 'locked_at'
+        'uid', 'title', 'slug', 'content', 'comment_count', 'locked_at',
     ];
 
     /**
@@ -76,7 +80,7 @@ class Thread extends Model
      * @var array
      */
     protected $casts = [
-      'locked_at' => 'timestamp'
+        'locked_at' => 'timestamp',
     ];
 
     /**

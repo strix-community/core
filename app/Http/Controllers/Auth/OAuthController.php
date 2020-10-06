@@ -25,7 +25,8 @@ class OAuthController extends Controller
     /**
      * Redirect the user to the provider authentication page.
      *
-     * @param  string $provider
+     * @param string $provider
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function redirectToProvider(string $provider): JsonResponse
@@ -37,8 +38,10 @@ class OAuthController extends Controller
      * Obtain the user information from the provider.
      *
      * @param string $provider
-     * @return DefaultUserResource
+     *
      * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileCannotBeAdded
+     *
+     * @return DefaultUserResource
      */
     public function handleProviderCallback(string $provider): User
     {

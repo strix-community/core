@@ -25,14 +25,12 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected $namespace = '';
 
-
     /**
      * The default route path.
      *
      * @var string
      */
-
-    public const ROUTE_PATH = __DIR__ . '/../../routes';
+    public const ROUTE_PATH = __DIR__.'/../../routes';
 
     /**
      * The path to the "home" route for your application.
@@ -77,7 +75,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes(): void
     {
         Route::middleware('web')
-            ->group(self::ROUTE_PATH . '/web.php');
+            ->group(self::ROUTE_PATH.'/web.php');
     }
 
     /**
@@ -92,6 +90,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->namespace)
-            ->group(self::ROUTE_PATH . '/api.php');
+            ->group(self::ROUTE_PATH.'/api.php');
     }
 }

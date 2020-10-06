@@ -9,9 +9,7 @@
 
 declare(strict_types=1);
 
-
 namespace Strix\Traits\Database;
-
 
 use DB;
 use PDO;

@@ -7,7 +7,6 @@
  * LICENSE file that was distributed with this source code.
  */
 
-
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
@@ -28,7 +27,6 @@ use Strix\Http\Controllers\Forums\Thread\ThreadController;
 |
 */
 
-
 Route::get('/test', function () {
     return view('pages.test');
 });
@@ -48,7 +46,6 @@ Route::group(['prefix' => 'auth'], function () {
     Route::get('oauth/callback/{provider}', [OAuthController::class, 'handleProviderCallback'])
         ->name('oauth.callback');
 });
-
 
 Route::group(['prefix' => 'forums'], function () {
     Route::get('/', [ForumController::class, '__invoke'])

@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Boots bouncer to use custom ability / roles
+     * Boots bouncer to use custom ability / roles.
      *
      * @return void
      */
@@ -55,9 +55,7 @@ class AppServiceProvider extends ServiceProvider
 
     protected function loadDefaultConfigFiles(): void
     {
-
-        $configPath = __DIR__ . '/../../config/*.php';
-
+        $configPath = __DIR__.'/../../config/*.php';
 
         $configFiles = glob($configPath);
 
