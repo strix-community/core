@@ -1,0 +1,12 @@
+/*
+ * This file is part of Strix.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
+@import "_card.css";
+@import "_card_header.css";
+@import "_card_background.css";
+@import "_card_feature.css";
+@import "_card_content.css";

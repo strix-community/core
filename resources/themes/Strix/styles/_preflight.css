@@ -1,0 +1,19 @@
+/*
+ * This file is part of Strix.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
+@import url("https://rsms.me/inter/inter.css");
+
+html {
+    @apply relative h-full font-sans font-normal antialiased;
+}
+
+html::before {
+    z-index: -99999;
+    content: " ";
+
+    @apply fixed h-full w-full top-0 left-0 bg-cover bg-no-repeat bg-center bg-gradient-to-b from-neutral-700 to-neutral-500;
+}

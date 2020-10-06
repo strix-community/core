@@ -1,0 +1,82 @@
+/*
+ * This file is part of Strix.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
+.button {
+  background-size: 230% 100%;
+
+  background-position: 40%;
+
+  @apply relative font-light inline-flex flex-shrink-0 items-center justify-center text-center text-base px-6 rounded select-none;
+
+  @apply disabled:pointer-events-none disabled:cursor-not-allowed disabled:text-neutral-500 disabled:border-neutral-200 disabled:bg-neutral-100;
+
+  @apply hover:translate-y-1 shadow-md;
+
+  @apply focus:appearance-none;
+}
+
+/**  Button variants **/
+
+.button--neutral {
+  @apply bg-neutral-500 text-neutral-100 transition-colors duration-300 ease-in-out;
+
+  @apply hover:bg-neutral-400;
+}
+
+.button--primary {
+  @apply bg-gradient-to-r from-primary-500 to-primary-700 text-neutral-100 transition-all duration-300 ease-in-out;
+
+  @apply hover:bg-center;
+}
+
+.button--success {
+  @apply text-success-500 transition-all duration-300 ease-in-out;
+
+  @apply hover:text-success-700;
+}
+
+.button--danger {
+  @apply text-danger-500 transition-all duration-300 ease-in-out;
+
+  @apply hover:text-danger-700;
+}
+
+/**  Button shadows **/
+
+.button--shadow {
+  @apply shadow;
+
+  @apply hover:shadow-md;
+}
+
+/**  Button sizes **/
+
+.button--sm {
+  @apply h-6 text-sm;
+}
+
+.button--md {
+  @apply h-8 text-sm;
+}
+
+.button--lg {
+  @apply h-10;
+}
+
+.button--xl {
+  @apply h-12;
+}
+
+/**  Button content **/
+
+.button__text {
+  @apply relative z-10;
+}
+
+.button__icon {
+  @apply z-10 mr-1;
+}

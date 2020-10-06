@@ -1,0 +1,10 @@
+/*
+ * This file is part of Strix.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
+.label {
+    @apply text-xs text-left pb-2 pointer-events-none text-neutral-200 transition-all duration-300;
+}

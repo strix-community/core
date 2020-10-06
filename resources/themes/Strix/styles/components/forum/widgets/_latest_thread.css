@@ -1,0 +1,34 @@
+/*
+ * This file is part of Strix.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
+.latest-threads {
+  @apply relative h-20 w-full;
+}
+
+.latest-threads__section {
+  @apply relative p-2 h-full w-full;
+}
+
+.latest-threads__block {
+  @apply relative h-full w-full flex flex-col justify-center;
+}
+
+.latest-threads__title {
+  @apply max-w-full font-light truncate text-neutral-050 pb-2;
+}
+
+.latest-threads__info {
+  @apply text-xs text-neutral-300;
+}
+
+.latest-threads__link {
+  @apply text-xs text-neutral-050;
+}
+
+.latest-threads__avatar {
+  @apply relative h-full w-full flex items-center justify-center;
+}

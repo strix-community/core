@@ -1,0 +1,86 @@
+/*
+ * This file is part of Strix.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
+.post {
+  @apply h-full w-full;
+}
+
+.post__user {
+  @apply relative block p-4 col-span-12;
+
+  @apply md:col-span-3;
+}
+
+.post__cover {
+  @apply absolute top-0 left-0 w-full h-full min-h-lg z-0 bg-cover bg-center;
+}
+
+.lazyLoad.isLoaded.post__cover {
+  @apply opacity-75 !important;
+}
+
+.post__mask {
+  @apply absolute inset-0 bg-cover transition-all duration-500 delay-200 ease-in-out;
+}
+
+.post__mask--small {
+  background-image: linear-gradient(
+    transparent 20rem,
+    theme("colors.neutral.600") 28rem
+  );
+}
+
+.post__mask--large {
+  background-image: linear-gradient(
+    transparent 0rem,
+    theme("colors.neutral.600") 28rem
+  );
+
+  @apply opacity-100;
+}
+
+.post__user:hover .post__mask--large {
+  @apply opacity-0;
+}
+
+.post__details {
+  @apply relative z-10 text-center transition-all duration-500 delay-200 ease-in-out;
+}
+
+.post__user:hover .post__details {
+  @apply opacity-0;
+}
+
+.post__username {
+  @apply font-medium text-xl text-neutral-050;
+}
+
+.post__content {
+  @apply relative flex flex-col h-full w-full align-top p-4 col-span-12;
+
+  @apply md:col-span-9;
+}
+
+.post__header {
+  @apply flex items-center justify-between text-sm;
+}
+
+.post__timestamp {
+  @apply text-neutral-300;
+}
+
+.post__id {
+  @apply text-neutral-300;
+}
+
+.post__body {
+  @apply block text-neutral-100 pt-4;
+}
+
+.post__footer {
+  @apply flex flex-row items-center justify-end mt-auto pt-4;
+}

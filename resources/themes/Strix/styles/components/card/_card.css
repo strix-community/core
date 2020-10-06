@@ -1,0 +1,12 @@
+/*
+ * This file is part of Strix.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
+.card {
+    box-shadow: 0 5px 15px -5px rgba(0,0,0,0.5);
+
+    @apply relative flex flex-col items-center justify-center bg-neutral-600 overflow-hidden flex-shrink-0 rounded;
+}

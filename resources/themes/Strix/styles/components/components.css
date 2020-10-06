@@ -1,0 +1,13 @@
+/*
+ * This file is part of Strix.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
+@import "global/global.css";
+@import "navigation/navigation.css";
+@import "card/card.css";
+@import "form/form.css";
+@import "forum/forum.css";
+@import "sections/sections.css";

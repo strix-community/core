@@ -1,0 +1,26 @@
+/*
+ * This file is part of Strix.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
+.backdrop {
+  @apply flex flex-col flex-1 items-center p-6;
+}
+
+.backdrop__container {
+  mask-image: linear-gradient(
+    to bottom,
+    theme("colors.black"),
+    theme("colors.black") calc(100% - 50%),
+    transparent calc(100% - 25%),
+    transparent
+  );
+
+  @apply absolute h-full max-h-6xl opacity-50 pointer-events-none w-full top-0 left-0 overflow-hidden;
+}
+
+.backdrop__img {
+  @apply h-full w-full object-cover object-center;
+}

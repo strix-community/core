@@ -1,0 +1,18 @@
+/*
+ * This file is part of Strix.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
+.card__feature {
+    @apply relative h-full w-full flex flex-col items-center justify-center p-4;
+}
+
+.card__icon {
+    @apply h-8 w-8 text-white;
+}
+
+.card__phrase {
+    @apply font-bold text-white;
+}

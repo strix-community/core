@@ -1,0 +1,46 @@
+/*
+ * This file is part of Strix.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
+.navbar {
+  @apply fixed w-full z-50 top-0 left-0 bg-transparent transition-all duration-300 ease-in-out;
+}
+
+.navbar--scroll {
+  @apply bg-neutral-700 bg-opacity-75;
+
+  backdrop-filter: blur(10px);
+}
+
+.navbar__container {
+  @apply flex flex-wrap items-center z-50 h-24 p-4 w-full max-w-6xl mx-auto;
+}
+
+.navbar__group {
+  @apply flex items-center;
+}
+
+.navbar__group--float-right {
+  @apply ml-auto;
+}
+
+.navbar__brand {
+  @apply mr-4;
+}
+
+.navbar__img {
+  @apply h-12 w-12;
+}
+
+.navbar__item {
+  @apply inline-flex px-4;
+}
+
+.navbar__link {
+  @apply text-sm opacity-75 cursor-pointer items-center justify-center text-neutral-200 transition-opacity duration-300 ease-in-out;
+
+  @apply hover:opacity-100;
+}

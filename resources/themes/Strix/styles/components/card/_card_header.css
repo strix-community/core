@@ -1,0 +1,14 @@
+/*
+ * This file is part of Strix.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
+.card__header {
+    @apply relative w-full bg-neutral-700 flex flex-row items-center p-4 text-sm z-50;
+}
+
+.card__title {
+    @apply text-sm text-neutral-050 tracking-wider;
+}

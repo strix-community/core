@@ -1,0 +1,20 @@
+/*
+ * This file is part of Strix.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
+.card__wrapper {
+    @apply h-full w-full absolute;
+}
+
+.card__background {
+    mask-image: linear-gradient(to bottom, theme('colors.neutral.600') 0%, rgba(0,0,0,0) 70%, rgba(0,0,0,0));
+
+    @apply absolute h-full w-full bg-cover bg-no-repeat bg-top;
+}
+
+.card__background--blurred {
+    filter: blur(5px);
+}
