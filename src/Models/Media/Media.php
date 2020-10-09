@@ -14,29 +14,30 @@ namespace Strix\Models\Media;
 use Strix\Traits\Models\HasNanoId;
 
 /**
- * Strix\Models\Media\Media
+ * Strix\Models\Media\Media.
  *
- * @property int $id
- * @property string $uid
- * @property string $model_type
- * @property int $model_id
- * @property string $collection_name
- * @property string $name
- * @property string $file_name
- * @property string|null $mime_type
- * @property string $disk
- * @property string|null $conversions_disk
- * @property int $size
- * @property array $manipulations
- * @property array $custom_properties
- * @property array $responsive_images
- * @property int|null $order_column
+ * @property int                             $id
+ * @property string                          $uid
+ * @property string                          $model_type
+ * @property int                             $model_id
+ * @property string                          $collection_name
+ * @property string                          $name
+ * @property string                          $file_name
+ * @property string|null                     $mime_type
+ * @property string                          $disk
+ * @property string|null                     $conversions_disk
+ * @property int                             $size
+ * @property array                           $manipulations
+ * @property array                           $custom_properties
+ * @property array                           $responsive_images
+ * @property int|null                        $order_column
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read string $extension
  * @property-read string $human_readable_size
  * @property-read string $type
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $model
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Media\Media newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Media\Media newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\Spatie\MediaLibrary\MediaCollections\Models\Media ordered()
@@ -59,6 +60,7 @@ use Strix\Traits\Models\HasNanoId;
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Media\Media whereUid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Media\Media whereUpdatedAt($value)
  * @mixin \Eloquent
+ *
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|static[] all($columns = ['*'])
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection|static[] get($columns = ['*'])
  */
@@ -66,5 +68,7 @@ class Media extends \Spatie\MediaLibrary\MediaCollections\Models\Media
 {
     use HasNanoId;
 
-    public static function bootHasUuid(): void {}
+    public static function bootHasUuid(): void
+    {
+    }
 }

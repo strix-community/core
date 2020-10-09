@@ -16,10 +16,10 @@ use Strix\View\Components\Spacer;
 return [
 
     'components' => [
-        'button' => Button::class,
-        'editor' => Editor::class,
-        'loader' => Loader::class,
+        'button'   => Button::class,
+        'editor'   => Editor::class,
+        'loader'   => Loader::class,
         'backdrop' => Backdrop::class,
-        'spacer' => Spacer::class
-    ]
+        'spacer'   => Spacer::class,
+    ],
 ];

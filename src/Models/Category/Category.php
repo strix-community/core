@@ -17,17 +17,18 @@ use Strix\Traits\Models\HasNanoId;
 use Strix\Traits\Models\HasSlug;
 
 /**
- * Strix\Models\Category\Category
+ * Strix\Models\Category\Category.
  *
- * @property int $id
- * @property string $uid
- * @property string $title
- * @property string $slug
- * @property mixed|null $description
- * @property int $weight
+ * @property int                             $id
+ * @property string                          $uid
+ * @property string                          $title
+ * @property string                          $slug
+ * @property mixed|null                      $description
+ * @property int                             $weight
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $deleted_at
+ * @property string|null                     $deleted_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Category\Category newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Category\Category newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Category\Category query()
@@ -41,15 +42,20 @@ use Strix\Traits\Models\HasSlug;
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Category\Category whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Category\Category whereWeight($value)
  * @mixin \Eloquent
+ *
  * @method static \Illuminate\Database\Query\Builder|\Strix\Models\Category\Category onlyTrashed()
  * @method static \Illuminate\Database\Query\Builder|\Strix\Models\Category\Category withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\Strix\Models\Category\Category withoutTrashed()
+ *
  * @property string $type
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereType($value)
  */
 class Category extends Model
 {
-    use HasNanoId, HasSlug, SoftDeletes;
+    use HasNanoId;
+    use HasSlug;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -57,7 +63,7 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-      'uid', 'title', 'description', 'slug', 'weight', 'type'
+        'uid', 'title', 'description', 'slug', 'weight', 'type',
     ];
 
     /**
@@ -73,5 +79,4 @@ class Category extends Model
      * @var array
      */
     protected $casts = [];
-
 }

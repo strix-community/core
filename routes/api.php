@@ -34,6 +34,6 @@ Route::get('/forums/threads/latest', function () {
             new \Strix\Http\Resources\Forum\Thread\DefaultThreadResource($this),
             new \Strix\Http\Resources\Forum\Thread\DefaultThreadResource($this),
             new \Strix\Http\Resources\Forum\Thread\DefaultThreadResource($this),
-        ]
+        ],
     ]);
 })->middleware('auth:sanctum');

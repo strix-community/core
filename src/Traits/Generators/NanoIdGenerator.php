@@ -9,9 +9,7 @@
 
 declare(strict_types=1);
 
-
 namespace Strix\Traits\Generators;
-
 
 use Hidehalo\Nanoid\Client;
 

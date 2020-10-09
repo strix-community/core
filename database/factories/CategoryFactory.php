@@ -10,8 +10,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Strix\Models\Category\Category;
 use Illuminate\Support\Str;
+use Strix\Models\Category\Category;
 
 class CategoryFactory extends Factory
 {
@@ -31,8 +31,8 @@ class CategoryFactory extends Factory
     {
         return [
             'title' => $this->faker->name,
-            'slug' => Str::slug($this->faker->name),
-            
+            'slug'  => Str::slug($this->faker->name),
+
         ];
     }
 }

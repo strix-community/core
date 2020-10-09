@@ -11,7 +11,9 @@ declare(strict_types=1);
 
 namespace Strix\Models\User;
 
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -21,24 +23,21 @@ use Strix\Traits\Media\CachesMediaUrl;
 use Strix\Traits\Models\HasComments;
 use Strix\Traits\Models\HasNanoId;
 use Strix\Traits\Models\HasSlug;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 /**
- * Strix\Models\User\User
+ * Strix\Models\User\User.
  *
- * @property int $id
- * @property string $uid
- * @property string $name
- * @property string $slug
- * @property string $email
+ * @property int                             $id
+ * @property string                          $uid
+ * @property string                          $name
+ * @property string                          $slug
+ * @property string                          $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
- * @property string|null $password
- * @property string|null $remember_token
+ * @property string|null                     $password
+ * @property string|null                     $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $deleted_at
+ * @property string|null                     $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Strix\Models\Ability\Ability[] $abilities
  * @property-read int|null $abilities_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Strix\Models\Comment\Comment[] $comments
@@ -53,6 +52,7 @@ use Illuminate\Notifications\Notifiable;
  * @property-read int|null $roles_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\User\User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\User\User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\User\User query()
@@ -71,16 +71,24 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\User\User whereUid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\User\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection|\Strix\Models\Thread\Thread[] $threads
  * @property-read int|null $threads_count
  * @property string|null $two_factor_secret
  * @property string|null $two_factor_recovery_codes
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorRecoveryCodes($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorSecret($value)
  */
 class User extends Authenticatable implements MustVerifyEmail, HasMedia
 {
-    use Notifiable, HasNanoId, InteractsWithMedia, HasRolesAndAbilities, CachesMediaUrl, HasSlug, HasComments;
+    use Notifiable;
+    use HasNanoId;
+    use InteractsWithMedia;
+    use HasRolesAndAbilities;
+    use CachesMediaUrl;
+    use HasSlug;
+    use HasComments;
 
     /**
      * The attributes that are mass assignable.
@@ -120,7 +128,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     }
 
     /**
-     * Registers the media collections the user will have
+     * Registers the media collections the user will have.
      *
      * @return void
      */

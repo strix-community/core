@@ -7,7 +7,6 @@
  * LICENSE file that was distributed with this source code.
  */
 
-
 namespace Strix\View\Components;
 
 use Illuminate\View\Component;
@@ -37,12 +36,10 @@ class Button extends Component
         string $type = self::DEFAULT_TYPE,
         string $backgroundColor = self::DEFAULT_BACKGROUND_COLOR,
         string $textColor = self::DEFAULT_TEXT_COLOR
-    )
-    {
+    ) {
         $this->type = $type;
         $this->backgroundColor = $backgroundColor;
         $this->textColor = $textColor;
-
     }
 
     /**

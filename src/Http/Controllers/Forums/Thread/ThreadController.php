@@ -28,7 +28,8 @@ class ThreadController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -39,20 +40,22 @@ class ThreadController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Thread  $thread
+     * @param Thread $thread
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Thread $thread)
     {
         return view('pages.forum.thread.show', [
-            'thread' => $thread
+            'thread' => $thread,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Thread  $thread
+     * @param Thread $thread
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Thread $thread)
@@ -63,8 +66,9 @@ class ThreadController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Thread  $thread
+     * @param \Illuminate\Http\Request $request
+     * @param Thread                   $thread
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Thread $thread)
@@ -75,7 +79,8 @@ class ThreadController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Thread  $thread
+     * @param Thread $thread
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Thread $thread)

@@ -31,7 +31,7 @@ class ThreadFactory extends Factory
     {
         return [
             'title' => $this->faker->name,
-            'slug' => Str::slug($this->faker->name),
+            'slug'  => Str::slug($this->faker->name),
         ];
     }
 }

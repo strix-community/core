@@ -10,11 +10,11 @@
 use Laravel\Fortify\Features;
 
 return [
-    'guard' => 'web',
+    'guard'     => 'web',
     'passwords' => 'users',
-    'username' => 'email',
-    'home' => '/home',
-    'limiters' => [
+    'username'  => 'email',
+    'home'      => '/home',
+    'limiters'  => [
         'login' => null,
     ],
     'features' => [
