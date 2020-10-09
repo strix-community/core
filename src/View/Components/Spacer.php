@@ -34,6 +34,6 @@ class Spacer extends Component
      */
     public function render()
     {
-        return view('components.spacer');
+        return view('strix::components.spacer');
     }
 }

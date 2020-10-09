@@ -12,10 +12,12 @@ declare(strict_types=1);
 namespace Strix\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\Compilers\BladeCompiler;
 use Strix\Models\Ability;
 use Strix\Models\Role;
+use Bouncer;
 
-class AppServiceProvider extends ServiceProvider
+class StrixServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
@@ -24,12 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->loadDefaultConfigFiles();
-
-        if ($this->app->isLocal()) {
-            $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
-            $this->app->register(TelescopeServiceProvider::class);
-        }
+        $this->setupApplication();
     }
 
     /**
@@ -49,8 +46,24 @@ class AppServiceProvider extends ServiceProvider
      */
     public function bootBouncerModels(): void
     {
-        \Bouncer::useAbilityModel(Ability\Ability::class);
-        \Bouncer::useRoleModel(Role\Role::class);
+        Bouncer::useAbilityModel(Ability\Ability::class);
+        Bouncer::useRoleModel(Role\Role::class);
+    }
+
+    protected function setupApplication(): void
+    {
+        $this->loadDefaultConfigFiles();
+
+        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'strix');
+
+        $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
+            /** @var BladeComponent $component */
+            foreach (config('strix.components') as $alias => $component) {
+                $blade->component($component, $alias, null);
+            }
+        });
+
+        $this->registerTelescope();
     }
 
     protected function loadDefaultConfigFiles(): void
@@ -66,6 +79,14 @@ class AppServiceProvider extends ServiceProvider
                 $config,
                 pathinfo($config)['filename']
             );
+        }
+    }
+
+    protected function registerTelescope(): void
+    {
+        if ($this->app->isLocal()) {
+            $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
+            $this->app->register(TelescopeServiceProvider::class);
         }
     }
 }

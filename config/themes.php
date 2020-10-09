@@ -7,6 +7,16 @@
  * LICENSE file that was distributed with this source code.
  */
 
+$defaultThemePath = __DIR__ . '/../resources/themes';
+
+$overridePath =  resource_path('themes');
+
+$themePath = $defaultThemePath;
+
+if(file_exists($overridePath)) {
+	$themePath = $overridePath;
+}
+
 return [
 
     /*
@@ -18,7 +28,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'themes_path' => resource_path('themes'), // eg: base_path('resources/themes')
+    'themes_path' => $themePath,
 
 	/*
 	|--------------------------------------------------------------------------
