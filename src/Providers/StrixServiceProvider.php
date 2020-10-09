@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace Strix\Providers;
 
+use Bouncer;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 use Strix\Models\Ability;
 use Strix\Models\Role;
-use Bouncer;
 
 class StrixServiceProvider extends ServiceProvider
 {
@@ -40,7 +40,7 @@ class StrixServiceProvider extends ServiceProvider
     }
 
     /**
-     * Boots bouncer to use custom ability / roles
+     * Boots bouncer to use custom ability / roles.
      *
      * @return void
      */
@@ -54,7 +54,7 @@ class StrixServiceProvider extends ServiceProvider
     {
         $this->loadDefaultConfigFiles();
 
-        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'strix');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'strix');
 
         $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
             /** @var BladeComponent $component */
@@ -68,9 +68,7 @@ class StrixServiceProvider extends ServiceProvider
 
     protected function loadDefaultConfigFiles(): void
     {
-
-        $configPath = __DIR__ . '/../../config/*.php';
-
+        $configPath = __DIR__.'/../../config/*.php';
 
         $configFiles = glob($configPath);
 

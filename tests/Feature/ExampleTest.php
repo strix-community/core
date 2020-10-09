@@ -7,10 +7,8 @@
  * LICENSE file that was distributed with this source code.
  */
 
-
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase

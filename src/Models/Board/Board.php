@@ -21,23 +21,24 @@ use Strix\Traits\Models\HasNanoId;
 use Strix\Traits\Models\HasSlug;
 
 /**
- * Strix\Models\Board\Board
+ * Strix\Models\Board\Board.
  *
- * @property int $id
- * @property string $uid
- * @property string $title
- * @property string $slug
- * @property mixed $description
+ * @property int         $id
+ * @property string      $uid
+ * @property string      $title
+ * @property string      $slug
+ * @property mixed       $description
  * @property string|null $locked_at
  * @property-read int|null $thread_count
- * @property int $comment_count
- * @property int $weight
+ * @property int                             $comment_count
+ * @property int                             $weight
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $deleted_at
+ * @property string|null                     $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Strix\Models\Category\Category[] $categories
  * @property-read int|null $categories_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Strix\Models\Thread\Thread[] $thread
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Board\Board newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Board\Board newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Board\Board query()
@@ -54,16 +55,21 @@ use Strix\Traits\Models\HasSlug;
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Board\Board whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Board\Board whereWeight($value)
  * @mixin \Eloquent
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection|\Strix\Models\Thread\Thread[] $threads
  * @property-read int|null $threads_count
+ *
  * @method static \Illuminate\Database\Query\Builder|\Strix\Models\Board\Board onlyTrashed()
  * @method static \Illuminate\Database\Query\Builder|\Strix\Models\Board\Board withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\Strix\Models\Board\Board withoutTrashed()
+ *
  * @property-read Category $category
  */
 class Board extends Model
 {
-    use HasNanoId, HasSlug, SoftDeletes;
+    use HasNanoId;
+    use HasSlug;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -71,7 +77,7 @@ class Board extends Model
      * @var array
      */
     protected $fillable = [
-        'uid', 'slug', 'title', 'description', 'thread_count', 'comment_count', 'weight'
+        'uid', 'slug', 'title', 'description', 'thread_count', 'comment_count', 'weight',
     ];
 
     /**
@@ -90,7 +96,7 @@ class Board extends Model
     }
 
     /**
-     * Registers the media collections the user will have
+     * Registers the media collections the user will have.
      *
      * @return void
      */

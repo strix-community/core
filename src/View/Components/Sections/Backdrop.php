@@ -22,8 +22,7 @@ class Backdrop extends Component
      */
     public function __construct(
         string $image
-    )
-    {
+    ) {
         $this->image = $image;
     }
 

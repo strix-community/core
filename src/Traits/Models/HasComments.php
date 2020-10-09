@@ -9,9 +9,7 @@
 
 declare(strict_types=1);
 
-
 namespace Strix\Traits\Models;
-
 
 use Strix\Models\Comment;
 

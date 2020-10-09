@@ -13,20 +13,21 @@ use Illuminate\Database\Eloquent\Model;
 use Strix\Traits\Models\HasNanoId;
 
 /**
- * Strix\Models\Comment\Comment
+ * Strix\Models\Comment\Comment.
  *
- * @property int $id
- * @property string $uid
- * @property string $content
- * @property int $commenter_id
- * @property string|null $commenter_type
- * @property string $commentable_type
- * @property string $commentable_id
+ * @property int                             $id
+ * @property string                          $uid
+ * @property string                          $content
+ * @property int                             $commenter_id
+ * @property string|null                     $commenter_type
+ * @property string                          $commentable_type
+ * @property string                          $commentable_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $deleted_at
+ * @property string|null                     $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $commentable
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $commenter
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Comment\Comment newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Comment\Comment newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\Strix\Models\Comment\Comment query()

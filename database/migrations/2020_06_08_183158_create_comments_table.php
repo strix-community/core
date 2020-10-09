@@ -28,10 +28,10 @@ class CreateCommentsTable extends Migration
             $table->longText('content');
             $table->unsignedBigInteger('commenter_id');
             $table->string('commenter_type')->nullable();
-            $table->index(["commenter_id", "commenter_type"]);
-            $table->string("commentable_type");
-            $table->uuid("commentable_id");
-            $table->index(["commentable_type", "commentable_id"]);
+            $table->index(['commenter_id', 'commenter_type']);
+            $table->string('commentable_type');
+            $table->uuid('commentable_id');
+            $table->index(['commentable_type', 'commentable_id']);
 
             $table->timestamps();
             $table->softDeletes();

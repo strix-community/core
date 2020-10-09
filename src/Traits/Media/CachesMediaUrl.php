@@ -9,16 +9,15 @@
 
 declare(strict_types=1);
 
-
 namespace Strix\Traits\Media;
-
 
 trait CachesMediaUrl
 {
     /**
-     * Caches Media urls to avoid duplicate calls
+     * Caches Media urls to avoid duplicate calls.
      *
      * @param string $collectionName
+     *
      * @return mixed
      */
     public function getCachedMediaUrl(string $collectionName): string
@@ -32,6 +31,7 @@ trait CachesMediaUrl
      * Forgets media url cache.
      *
      * @param string $collectionName
+     *
      * @return bool
      */
     public function flushMediaCache(string $collectionName): bool
@@ -43,15 +43,16 @@ trait CachesMediaUrl
      * Unique cache key to avoid overriding other cache keys using this trait.
      *
      * @param string $collectionName
+     *
      * @return string
      */
     protected function getMediaCacheKey(string $collectionName): string
     {
-        return class_basename(static::class) . ':' . $this->id . ':' . $collectionName;
+        return class_basename(static::class).':'.$this->id.':'.$collectionName;
     }
 
     /**
-     * Sets TTL for remember function. Override in base class to change cache time
+     * Sets TTL for remember function. Override in base class to change cache time.
      *
      * @return \Carbon\Carbon
      */
