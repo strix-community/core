@@ -27,19 +27,21 @@ use Strix\Http\Controllers\Forums\Thread\ThreadController;
 |
 */
 
-Route::get('/test', function () {
-    return view('pages.test');
-});
+// Route::get('/test', function () {
+//     return view('pages.test');
+// });
 
-Route::post('/test', function () {
-    dd(clean(request()->get('content')));
-});
+// Route::post('/test', function () {
+//     dd(clean(request()->get('content')));
+// });
 
 Route::get('/', function () {
     return view('pages.index');
 });
 
-Route::group(['prefix' => 'auth'], function () {
+Route::prefix('auth')
+->name('auth.')
+->group(function () {
     Route::post('oauth/{provider}', [OAuthController::class, 'redirectToProvider'])
         ->name('oauth.redirect');
 
@@ -47,7 +49,9 @@ Route::group(['prefix' => 'auth'], function () {
         ->name('oauth.callback');
 });
 
-Route::group(['prefix' => 'forums'], function () {
+Route::prefix('forums')
+->name('forums.')
+->group(function () {
     Route::get('/', [ForumController::class, '__invoke'])
         ->name('index');
 

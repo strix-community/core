@@ -14,6 +14,12 @@ use Strix\View\Components\Sections\Backdrop;
 use Strix\View\Components\Spacer;
 
 return [
+
+    'enabled_routes' => [
+        'web' => false,
+        'api' => true
+    ],
+
     'components' => [
         'button'   => Button::class,
         'editor'   => Editor::class,

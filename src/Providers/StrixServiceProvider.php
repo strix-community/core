@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Strix\Providers;
 
 use Bouncer;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 use Strix\Models\Ability;
@@ -35,6 +36,7 @@ class StrixServiceProvider extends ServiceProvider
         }
 
         $this->loadConfigurationFiles();
+        $this->configureRoutes();
         $this->registerBlade();
         $this->configurePublishing();
         $this->registerTelescope();
@@ -63,7 +65,9 @@ class StrixServiceProvider extends ServiceProvider
 
     protected function loadConfigurationFiles(): void
     {
-        foreach (Finder::create()->files()->name('*.php')->in(realpath(STRIX_PATH . '/config')) as $config) {
+        $defaultConfigPath = realpath(STRIX_PATH . '/config');
+
+        foreach (Finder::create()->files()->name('*.php')->in($defaultConfigPath) as $config) {
             $this->mergeConfigFrom(
                 $config->getRealPath(),
                 (string) Str::of($config->getFilename())->replace('.php', null)
@@ -82,9 +86,11 @@ class StrixServiceProvider extends ServiceProvider
     protected function registerBlade(): void
     {
 
-        $viewPath = STRIX_PATH . '/resources/views';
+        $viewPath = realpath(STRIX_PATH . '/resources/views');
 
-        View::share('strixAssetVersion', md5_file(STRIX_PATH . '/public/themes/Strix/mix-manifest.json'));
+        $mixManifestPath = realpath(STRIX_PATH . '/public/themes/Strix/mix-manifest.json');
+
+        View::share('strixAssetVersion', md5_file($mixManifestPath));
 
         $this->loadViewsFrom($viewPath, 'strix');
 
@@ -107,7 +113,9 @@ class StrixServiceProvider extends ServiceProvider
 
         $configFiles = [];
 
-        foreach (Finder::create()->files()->name('*.php')->in(realpath(STRIX_PATH . '/config')) as $config) {
+        $defaultConfigPath = realpath(STRIX_PATH . '/config');
+
+        foreach (Finder::create()->files()->name('*.php')->in($defaultConfigPath) as $config) {
             $configPath = $config->getRealPath();
 
             $publishedConfigPath = config_path($config->getFilename());
@@ -120,11 +128,40 @@ class StrixServiceProvider extends ServiceProvider
             'strix-config');
 
         $this->publishes([
-            STRIX_PATH . '/resources/views' => resource_path('views'),
+            realpath(STRIX_PATH . '/resources/views') => resource_path('views'),
         ], 'strix-views');
 
         $this->publishes([
-            STRIX_PATH . '/public' => public_path(),
+            realpath(STRIX_PATH . '/public') => public_path(),
         ], 'strix-assets');
+
+        $this->publishes([
+            realpath(STRIX_PATH . '/routes/strix.php') => base_path('routes/strix.php'),
+        ], 'strix-routes');
+    }
+
+    protected function configureRoutes(): void
+    {
+        $defaultWebRoutesPath = realpath(STRIX_PATH . '/routes/strix-web.php');
+
+        $defaultApiRoutesPath = realpath(STRIX_PATH . '/routes/strix-api.php');
+
+        if(config('strix.enabled_routes.web') === true) {
+            Route::group([
+                'middleware' => 'web',
+                'namespace' => '\\Strix',
+            ], function () use ($defaultWebRoutesPath) {
+                $this->loadRoutesFrom($defaultWebRoutesPath);
+            });
+        }
+
+        if (config('strix.enabled_routes.api') === true) {
+            Route::group([
+                'middleware' => 'api',
+                'namespace' => '\\Strix',
+            ], function () use ($defaultApiRoutesPath) {
+                $this->loadRoutesFrom($defaultApiRoutesPath);
+            });
+        }
     }
 }
