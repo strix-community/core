@@ -13,11 +13,11 @@ namespace Strix\Providers;
 
 use Bouncer;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Illuminate\View\Compilers\BladeCompiler;
 use Strix\Models\Ability;
 use Strix\Models\Role;
 use Symfony\Component\Finder\Finder;
-use Illuminate\Support\Str;
 
 class StrixServiceProvider extends ServiceProvider
 {
@@ -58,7 +58,7 @@ class StrixServiceProvider extends ServiceProvider
 
     protected function loadConfigurationFiles(): void
     {
-        $configPath = realpath(__DIR__ . '/../../config');
+        $configPath = realpath(__DIR__.'/../../config');
 
         foreach (Finder::create()->files()->name('*.php')->in($configPath) as $config) {
             $this->mergeConfigFrom(
@@ -78,7 +78,7 @@ class StrixServiceProvider extends ServiceProvider
 
     protected function registerBlade(): void
     {
-        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'strix');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'strix');
 
         $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
             /** @var BladeComponent $component */
