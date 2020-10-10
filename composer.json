@@ -35,13 +35,6 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
-    "extra": {
-        "laravel": {
-        "dont-discover": [
-            "laravel/telescope"
-        ]
-        }
-    },
     "autoload": {
         "psr-4": {
         "Strix\\": "src/",
@@ -53,6 +46,13 @@
         "Tests\\": "tests/"
         }
     },
+    "extra": {
+    "laravel": {
+        "providers": [
+            "Strix\\Providers\\StrixServiceProvider"
+        ],
+    }
+},
     "minimum-stability": "dev",
     "prefer-stable": true
     }

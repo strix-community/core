@@ -20,6 +20,4 @@ mix
         tailwindcss('resources/themes/Strix/config/tailwind.config.js')
     ]);
 
-if (mix.inProduction()) {
-    mix.version();
-}
+mix.version();

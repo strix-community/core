@@ -16,6 +16,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 use Strix\Models\Ability;
 use Strix\Models\Role;
+use Symfony\Component\Finder\Finder;
+use Illuminate\Support\Str;
 
 class StrixServiceProvider extends ServiceProvider
 {
@@ -26,7 +28,11 @@ class StrixServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->setupApplication();
+        $this->loadConfigurationFiles();
+
+        $this->registerBlade();
+
+        $this->registerTelescope();
     }
 
     /**
@@ -50,32 +56,14 @@ class StrixServiceProvider extends ServiceProvider
         Bouncer::useRoleModel(Role\Role::class);
     }
 
-    protected function setupApplication(): void
+    protected function loadConfigurationFiles(): void
     {
-        $this->loadDefaultConfigFiles();
+        $configPath = realpath(__DIR__ . '/../../config');
 
-        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'strix');
-
-        $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
-            /** @var BladeComponent $component */
-            foreach (config('strix.components') as $alias => $component) {
-                $blade->component($component, $alias, null);
-            }
-        });
-
-        $this->registerTelescope();
-    }
-
-    protected function loadDefaultConfigFiles(): void
-    {
-        $configPath = __DIR__.'/../../config/*.php';
-
-        $configFiles = glob($configPath);
-
-        foreach ($configFiles as $config) {
+        foreach (Finder::create()->files()->name('*.php')->in($configPath) as $config) {
             $this->mergeConfigFrom(
-                $config,
-                pathinfo($config)['filename']
+                $config->getRealPath(),
+                (string) Str::of($config->getFilename())->replace('.php', null)
             );
         }
     }
@@ -86,5 +74,17 @@ class StrixServiceProvider extends ServiceProvider
             $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
             $this->app->register(TelescopeServiceProvider::class);
         }
+    }
+
+    protected function registerBlade(): void
+    {
+        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'strix');
+
+        $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
+            /** @var BladeComponent $component */
+            foreach (config('strix.components') as $alias => $component) {
+                $blade->component($component, $alias, null);
+            }
+        });
     }
 }
