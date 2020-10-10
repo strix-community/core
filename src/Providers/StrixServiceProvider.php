@@ -12,13 +12,13 @@ declare(strict_types=1);
 namespace Strix\Providers;
 
 use Bouncer;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Illuminate\View\Compilers\BladeCompiler;
 use Strix\Models\Ability;
 use Strix\Models\Role;
 use Symfony\Component\Finder\Finder;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\View;
 
 class StrixServiceProvider extends ServiceProvider
 {
@@ -29,8 +29,8 @@ class StrixServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        if (! defined('STRIX_PATH')) {
-            define('STRIX_PATH', realpath(__DIR__ . '/../../'));
+        if (!defined('STRIX_PATH')) {
+            define('STRIX_PATH', realpath(__DIR__.'/../../'));
         }
 
         $this->loadConfigurationFiles();
@@ -63,7 +63,7 @@ class StrixServiceProvider extends ServiceProvider
 
     protected function loadConfigurationFiles(): void
     {
-        $configPath = realpath(STRIX_PATH . '/config');
+        $configPath = realpath(STRIX_PATH.'/config');
 
         foreach (Finder::create()->files()->name('*.php')->in($configPath) as $config) {
             $this->mergeConfigFrom(
@@ -83,10 +83,9 @@ class StrixServiceProvider extends ServiceProvider
 
     protected function registerBlade(): void
     {
+        $viewPath = STRIX_PATH.'/resources/views';
 
-        $viewPath = STRIX_PATH . '/resources/views';
-
-        View::share('strixAssetVersion', md5_file(STRIX_PATH . '/public/themes/Strix/mix-manifest.json'));
+        View::share('strixAssetVersion', md5_file(STRIX_PATH.'/public/themes/Strix/mix-manifest.json'));
 
         $this->loadViewsFrom($viewPath, 'strix');
 
@@ -106,8 +105,7 @@ class StrixServiceProvider extends ServiceProvider
     public function registerAssets(): void
     {
         $this->publishes([
-            STRIX_PATH . '/public' => public_path(),
+            STRIX_PATH.'/public' => public_path(),
         ], 'strix-assets');
     }
-
 }
