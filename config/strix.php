@@ -17,7 +17,7 @@ return [
 
     'enabled_routes' => [
         'web' => false,
-        'api' => true
+        'api' => true,
     ],
 
     'components' => [

@@ -13,17 +13,16 @@ namespace Strix\Providers;
 
 use Bouncer;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Illuminate\View\Compilers\BladeCompiler;
 use Strix\Models\Ability;
 use Strix\Models\Role;
 use Symfony\Component\Finder\Finder;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\View;
 
 class StrixServiceProvider extends ServiceProvider
 {
-
     /**
      * Register any application services.
      *
@@ -32,7 +31,7 @@ class StrixServiceProvider extends ServiceProvider
     public function register(): void
     {
         if (!defined('STRIX_PATH')) {
-            define('STRIX_PATH', realpath(__DIR__ . '/../../'));
+            define('STRIX_PATH', realpath(__DIR__.'/../../'));
         }
 
         $this->loadConfigurationFiles();
@@ -65,7 +64,7 @@ class StrixServiceProvider extends ServiceProvider
 
     protected function loadConfigurationFiles(): void
     {
-        $defaultConfigPath = realpath(STRIX_PATH . '/config');
+        $defaultConfigPath = realpath(STRIX_PATH.'/config');
 
         foreach (Finder::create()->files()->name('*.php')->in($defaultConfigPath) as $config) {
             $this->mergeConfigFrom(
@@ -85,10 +84,9 @@ class StrixServiceProvider extends ServiceProvider
 
     protected function registerBlade(): void
     {
+        $viewPath = realpath(STRIX_PATH.'/resources/views');
 
-        $viewPath = realpath(STRIX_PATH . '/resources/views');
-
-        $mixManifestPath = realpath(STRIX_PATH . '/public/themes/Strix/mix-manifest.json');
+        $mixManifestPath = realpath(STRIX_PATH.'/public/themes/Strix/mix-manifest.json');
 
         View::share('strixAssetVersion', md5_file($mixManifestPath));
 
@@ -109,11 +107,13 @@ class StrixServiceProvider extends ServiceProvider
      */
     protected function configurePublishing(): void
     {
-        if (!$this->app->runningInConsole()) return;
+        if (!$this->app->runningInConsole()) {
+            return;
+        }
 
         $configFiles = [];
 
-        $defaultConfigPath = realpath(STRIX_PATH . '/config');
+        $defaultConfigPath = realpath(STRIX_PATH.'/config');
 
         foreach (Finder::create()->files()->name('*.php')->in($defaultConfigPath) as $config) {
             $configPath = $config->getRealPath();
@@ -125,31 +125,32 @@ class StrixServiceProvider extends ServiceProvider
 
         $this->publishes(
             $configFiles,
-            'strix-config');
+            'strix-config'
+        );
 
         $this->publishes([
-            realpath(STRIX_PATH . '/resources/views') => resource_path('views'),
+            realpath(STRIX_PATH.'/resources/views') => resource_path('views'),
         ], 'strix-views');
 
         $this->publishes([
-            realpath(STRIX_PATH . '/public') => public_path(),
+            realpath(STRIX_PATH.'/public') => public_path(),
         ], 'strix-assets');
 
         $this->publishes([
-            realpath(STRIX_PATH . '/routes/strix.php') => base_path('routes/strix.php'),
+            realpath(STRIX_PATH.'/routes/strix.php') => base_path('routes/strix.php'),
         ], 'strix-routes');
     }
 
     protected function configureRoutes(): void
     {
-        $defaultWebRoutesPath = realpath(STRIX_PATH . '/routes/strix-web.php');
+        $defaultWebRoutesPath = realpath(STRIX_PATH.'/routes/strix-web.php');
 
-        $defaultApiRoutesPath = realpath(STRIX_PATH . '/routes/strix-api.php');
+        $defaultApiRoutesPath = realpath(STRIX_PATH.'/routes/strix-api.php');
 
-        if(config('strix.enabled_routes.web') === true) {
+        if (config('strix.enabled_routes.web') === true) {
             Route::group([
                 'middleware' => 'web',
-                'namespace' => '\\Strix',
+                'namespace'  => '\\Strix',
             ], function () use ($defaultWebRoutesPath) {
                 $this->loadRoutesFrom($defaultWebRoutesPath);
             });
@@ -158,7 +159,7 @@ class StrixServiceProvider extends ServiceProvider
         if (config('strix.enabled_routes.api') === true) {
             Route::group([
                 'middleware' => 'api',
-                'namespace' => '\\Strix',
+                'namespace'  => '\\Strix',
             ], function () use ($defaultApiRoutesPath) {
                 $this->loadRoutesFrom($defaultApiRoutesPath);
             });
