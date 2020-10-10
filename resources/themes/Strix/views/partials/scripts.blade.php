@@ -25,4 +25,4 @@
     @livewireScripts
 
         <!-- Scripts -->
-    <script defer src="{{ mix('scripts/app.js', 'themes/Strix') }}" defer data-turbolinks-track="true"></script>
+    <script defer src="{{ config('strix.assets.scripts') }}" defer data-turbolinks-track="true"></script>
