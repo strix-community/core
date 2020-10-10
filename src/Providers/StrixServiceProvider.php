@@ -18,6 +18,7 @@ use Strix\Models\Ability;
 use Strix\Models\Role;
 use Symfony\Component\Finder\Finder;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\View;
 
 class StrixServiceProvider extends ServiceProvider
 {
@@ -85,6 +86,8 @@ class StrixServiceProvider extends ServiceProvider
 
         $viewPath = STRIX_PATH . '/resources/views';
 
+        View::share('strixAssetVersion', md5_file(STRIX_PATH . '/public/themes/Strix/mix-manifest.json'));
+
         $this->loadViewsFrom($viewPath, 'strix');
 
         $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
@@ -94,4 +97,17 @@ class StrixServiceProvider extends ServiceProvider
             }
         });
     }
+
+    /**
+     * Define the asset publishing configuration.
+     *
+     * @return void
+     */
+    public function registerAssets(): void
+    {
+        $this->publishes([
+            STRIX_PATH . '/public' => public_path(),
+        ], 'strix-assets');
+    }
+
 }

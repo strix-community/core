@@ -15,9 +15,9 @@ mix.webpackConfig({
 });
 
 mix
-    .js("resources/themes/Strix/scripts/app.js", "public/themes/Strix/scripts/app.js")
-    .postCss("resources/themes/Strix/styles/app.css", "public/themes/Strix/styles/app.css", [
+    .setPublicPath(path.normalize('public/themes/Strix'))
+    .js("resources/themes/Strix/scripts/app.js", "scripts/app.js")
+    .postCss("resources/themes/Strix/styles/app.css", "styles/app.css", [
         tailwindcss('resources/themes/Strix/config/tailwind.config.js')
-    ]);
-
-mix.version();
+    ])
+    .version();
