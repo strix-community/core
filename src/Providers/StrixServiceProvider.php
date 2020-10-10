@@ -28,6 +28,10 @@ class StrixServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        if (! defined('STRIX_PATH')) {
+            define('STRIX_PATH', realpath(__DIR__ . '/../../'));
+        }
+
         $this->loadConfigurationFiles();
 
         $this->registerBlade();
@@ -58,7 +62,7 @@ class StrixServiceProvider extends ServiceProvider
 
     protected function loadConfigurationFiles(): void
     {
-        $configPath = realpath(__DIR__ . '/../../config');
+        $configPath = realpath(STRIX_PATH . '/config');
 
         foreach (Finder::create()->files()->name('*.php')->in($configPath) as $config) {
             $this->mergeConfigFrom(
@@ -78,7 +82,10 @@ class StrixServiceProvider extends ServiceProvider
 
     protected function registerBlade(): void
     {
-        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'strix');
+
+        $viewPath = STRIX_PATH . '/resources/views';
+
+        $this->loadViewsFrom($viewPath, 'strix');
 
         $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
             /** @var BladeComponent $component */
