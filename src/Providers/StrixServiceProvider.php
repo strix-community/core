@@ -12,17 +12,16 @@ declare(strict_types=1);
 namespace Strix\Providers;
 
 use Bouncer;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Illuminate\View\Compilers\BladeCompiler;
 use Strix\Models\Ability;
 use Strix\Models\Role;
 use Symfony\Component\Finder\Finder;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\View;
 
 class StrixServiceProvider extends ServiceProvider
 {
-
     /**
      * Register any application services.
      *
@@ -31,7 +30,7 @@ class StrixServiceProvider extends ServiceProvider
     public function register(): void
     {
         if (!defined('STRIX_PATH')) {
-            define('STRIX_PATH', realpath(__DIR__ . '/../../'));
+            define('STRIX_PATH', realpath(__DIR__.'/../../'));
         }
 
         $this->loadConfigurationFiles();
@@ -63,7 +62,7 @@ class StrixServiceProvider extends ServiceProvider
 
     protected function loadConfigurationFiles(): void
     {
-        foreach (Finder::create()->files()->name('*.php')->in(realpath(STRIX_PATH . '/config')) as $config) {
+        foreach (Finder::create()->files()->name('*.php')->in(realpath(STRIX_PATH.'/config')) as $config) {
             $this->mergeConfigFrom(
                 $config->getRealPath(),
                 (string) Str::of($config->getFilename())->replace('.php', null)
@@ -81,10 +80,9 @@ class StrixServiceProvider extends ServiceProvider
 
     protected function registerBlade(): void
     {
+        $viewPath = STRIX_PATH.'/resources/views';
 
-        $viewPath = STRIX_PATH . '/resources/views';
-
-        View::share('strixAssetVersion', md5_file(STRIX_PATH . '/public/themes/Strix/mix-manifest.json'));
+        View::share('strixAssetVersion', md5_file(STRIX_PATH.'/public/themes/Strix/mix-manifest.json'));
 
         $this->loadViewsFrom($viewPath, 'strix');
 
@@ -103,11 +101,13 @@ class StrixServiceProvider extends ServiceProvider
      */
     protected function configurePublishing(): void
     {
-        if (!$this->app->runningInConsole()) return;
+        if (!$this->app->runningInConsole()) {
+            return;
+        }
 
         $configFiles = [];
 
-        foreach (Finder::create()->files()->name('*.php')->in(realpath(STRIX_PATH . '/config')) as $config) {
+        foreach (Finder::create()->files()->name('*.php')->in(realpath(STRIX_PATH.'/config')) as $config) {
             $configPath = $config->getRealPath();
 
             $publishedConfigPath = config_path($config->getFilename());
@@ -117,14 +117,15 @@ class StrixServiceProvider extends ServiceProvider
 
         $this->publishes(
             $configFiles,
-            'strix-config');
+            'strix-config'
+        );
 
         $this->publishes([
-            STRIX_PATH . '/resources/views' => resource_path('views'),
+            STRIX_PATH.'/resources/views' => resource_path('views'),
         ], 'strix-views');
 
         $this->publishes([
-            STRIX_PATH . '/public' => public_path(),
+            STRIX_PATH.'/public' => public_path(),
         ], 'strix-assets');
     }
 }
