@@ -97,18 +97,6 @@ class StrixServiceProvider extends ServiceProvider
     }
 
     /**
-     * Define the asset publishing configuration.
-     *
-     * @return void
-     */
-    public function registerAssets(): void
-    {
-        $this->publishes([
-            STRIX_PATH . '/public' => public_path(),
-        ], 'strix-assets');
-    }
-
-    /**
      * Configure publishing for the package.
      *
      * @return void
@@ -117,16 +105,26 @@ class StrixServiceProvider extends ServiceProvider
     {
         if (!$this->app->runningInConsole()) return;
 
-        $files = [];
+        $configFiles = [];
 
         foreach (Finder::create()->files()->name('*.php')->in(realpath(STRIX_PATH . '/config')) as $config) {
             $configPath = $config->getRealPath();
 
             $publishedConfigPath = config_path($config->getFilename());
 
-            $files[$configPath] = $publishedConfigPath;
+            $configFiles[$configPath] = $publishedConfigPath;
         }
 
-        $this->publishes($files, 'strix-config');
+        $this->publishes(
+            $configFiles,
+            'strix-config');
+
+        $this->publishes([
+            STRIX_PATH . '/resources/views' => resource_path('views'),
+        ], 'strix-views');
+
+        $this->publishes([
+            STRIX_PATH . '/public' => public_path(),
+        ], 'strix-assets');
     }
 }
