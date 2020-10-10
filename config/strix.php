@@ -16,8 +16,8 @@ use Strix\View\Components\Spacer;
 return [
 
     'assets' => [
-        'styles' => mix('styles/app.css', 'themes/Strix'),
-        'scripts' => mix('scripts/app.js', 'themes/Strix')
+        'styles'  => mix('styles/app.css', 'themes/Strix'),
+        'scripts' => mix('scripts/app.js', 'themes/Strix'),
     ],
 
     'components' => [
