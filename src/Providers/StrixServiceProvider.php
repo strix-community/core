@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace Strix\Providers;
 
 use Bouncer;
-use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 use Strix\Models\Ability;
@@ -31,7 +30,7 @@ class StrixServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        if (! defined('STRIX_PATH')) {
+        if (!defined('STRIX_PATH')) {
             define('STRIX_PATH', realpath(__DIR__ . '/../../'));
         }
 
