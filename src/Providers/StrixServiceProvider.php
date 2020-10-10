@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Strix\Providers;
 
 use Bouncer;
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 use Strix\Models\Ability;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\View;
 
 class StrixServiceProvider extends ServiceProvider
 {
+
     /**
      * Register any application services.
      *
@@ -34,9 +36,8 @@ class StrixServiceProvider extends ServiceProvider
         }
 
         $this->loadConfigurationFiles();
-
         $this->registerBlade();
-
+        $this->configurePublishing();
         $this->registerTelescope();
     }
 
@@ -63,9 +64,7 @@ class StrixServiceProvider extends ServiceProvider
 
     protected function loadConfigurationFiles(): void
     {
-        $configPath = realpath(STRIX_PATH . '/config');
-
-        foreach (Finder::create()->files()->name('*.php')->in($configPath) as $config) {
+        foreach (Finder::create()->files()->name('*.php')->in(realpath(STRIX_PATH . '/config')) as $config) {
             $this->mergeConfigFrom(
                 $config->getRealPath(),
                 (string) Str::of($config->getFilename())->replace('.php', null)
@@ -110,4 +109,25 @@ class StrixServiceProvider extends ServiceProvider
         ], 'strix-assets');
     }
 
+    /**
+     * Configure publishing for the package.
+     *
+     * @return void
+     */
+    protected function configurePublishing(): void
+    {
+        if (!$this->app->runningInConsole()) return;
+
+        $files = [];
+
+        foreach (Finder::create()->files()->name('*.php')->in(realpath(STRIX_PATH . '/config')) as $config) {
+            $configPath = $config->getRealPath();
+
+            $publishedConfigPath = config_path($config->getFilename());
+
+            $files[$configPath] = $publishedConfigPath;
+        }
+
+        $this->publishes($files, 'strix-config');
+    }
 }
